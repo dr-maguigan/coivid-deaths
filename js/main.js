@@ -4,6 +4,10 @@ var map = L.map('map', {
 	zoom: 7.5
 });
 
+var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    				maxZoom: 13,
+   				attribution: '© OpenStreetMap'}).addTo(map);
+
 //create global covid variable and retrieve information, assign it to covid
 var anchorage;
 $.ajax({
