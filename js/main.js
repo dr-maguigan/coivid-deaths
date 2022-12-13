@@ -17,7 +17,7 @@ $.ajax({
     async: false,
     data: $(this).serialize(),
     success: function(data) {
-	    cd = (data[1].county_name);
+	    cd = (data[1020].county_name);
 	    county = Number(cd);
     }
 });
