@@ -3,7 +3,7 @@ var map = L.map('map', {
 	center: [30.9843, -91.9623],
 	zoom: 7.5
 });
-
+//add openstreetmap tilelayer
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     				maxZoom: 13,
    				attribution: '© OpenStreetMap'}).addTo(map);
