@@ -6,14 +6,14 @@ var map = L.map('map', {
 
 //create global covid variable and retrieve information, assign it to covid
 var anchorage;
-var covid = $.ajax({
+$.ajax({
     type: "GET",
     url: "https://data.cdc.gov/resource/kn79-hsxy.json",
     dataType: 'json',
     async: false,
     data: $(this).serialize(),
     success: function(data) {
-	    ad = (covid[1].covid_death);
+	    ad = (data[1].covid_death);
 	    anchorage = Number(ad);
     }
 });
