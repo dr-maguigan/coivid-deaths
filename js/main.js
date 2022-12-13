@@ -17,7 +17,7 @@ $.ajax({
     async: false,
     data: $(this).serialize(),
     success: function(data) {
-	    cd = (data[1].covid_death);
+	    cd = (data[1].county_name);
 	    county = Number(cd);
     }
 });
