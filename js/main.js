@@ -12,7 +12,7 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var county;
 $.ajax({
     type: "GET",
-    url: "https://data.cdc.gov/resource/kn79-hsxy.json",
+    url: "https://data.cdc.gov/resource/kn79-hsxy.json?$limit=5000",
     dataType: 'json',
     async: false,
     data: $(this).serialize(),
