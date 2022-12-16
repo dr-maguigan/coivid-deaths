@@ -20,7 +20,7 @@ $.ajax({
     success: function(data) {
 	    ap = (data[1100].county_name);
 	    acadia = ap;
-	    wp = (data[1157].county_name);
+	    wp = (data[1163].county_name);
 	    winn = wp;
     }
 });
