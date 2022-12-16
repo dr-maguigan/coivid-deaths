@@ -80,10 +80,8 @@ $.ajax({
     async: false,
     data: $(this).serialize(),
     success: function(data) {
-	    ap = (data[1100].county_name);
-	    acadia = ap;
-	    wp = (data[1163].county_name);
-	    winn = wp;
+	    acadia = (data[1100].covid_death);
+	    winn = (data[1163].covid_death);
     }
 });
 console.log(acadia);
