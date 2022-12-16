@@ -9,7 +9,7 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
    				attribution: '© OpenStreetMap'}).addTo(map);
 
 //create global covid variable and retrieve information, assign it to covid
-var county;
+var acadia;
 $.ajax({
     type: "GET",
     url: "https://data.cdc.gov/resource/kn79-hsxy.json?$limit=5000",
@@ -17,8 +17,8 @@ $.ajax({
     async: false,
     data: $(this).serialize(),
     success: function(data) {
-	    cd = (data[1100].county_name);
-	    county = cd;
+	    ap = (data[1100].county_name);
+	    acadia = ap;
     }
 });
-console.log(county);
+console.log(acadia);
