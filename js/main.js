@@ -25,3 +25,4 @@ $.ajax({
     }
 });
 console.log(acadia);
+console.log(winn);
