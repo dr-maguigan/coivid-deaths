@@ -148,3 +148,17 @@ $.ajax({
 });
 console.log(acadia);
 console.log(winn);
+
+var parishes =  new L.geoJson( '' );
+parishes.addTo(map);
+
+//define watershed geojson from file
+$.ajax({
+	dataType: "json",
+	url: "data/la_par.json",
+	success: function(data) {
+		$(data.features).each(function(key, data) {
+			parishes.addData(data);
+			});
+		}
+}).error(function() {});
