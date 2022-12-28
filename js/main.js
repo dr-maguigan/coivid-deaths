@@ -294,7 +294,7 @@ console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph);
 		});
 	}
 
-	map.attributionControl.addAttribution("Covid-19 deaths data &copy; <a href='http://cdc.gov/'>CDC</a>" "Population data &copy; <a href='http://census.gov/'>US Census Bureau</a>");
+	map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC</a> Population data: <a href='http://census.gov/'>US Census Bureau</a>");
 
 	const legend = L.control({position: 'bottomright'});
 
