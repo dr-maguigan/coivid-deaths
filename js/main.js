@@ -174,15 +174,15 @@ var iberia_pop = 68975;
 var iberville_pop = 29824;
 var jackson_pop = 14876;
 var jefferson_pop = 433688;
-var jd_pop = ;
-var lafayette_pop = ;
-var lafourche_pop = ;
-var lasalle_pop = ;
-var lincoln_pop = ;
-var livingston_pop = ;
-var madison_pop = ;
-var more_pop = ;
-var natch_pop = ;
+var jd_pop = 32345;
+var lafayette_pop = 244205;
+var lafourche_pop = 97504;
+var lasalle_pop = 14834;
+var lincoln_pop = 48152;
+var livingston_pop = 145830;
+var madison_pop = 9799;
+var more_pop = 25025;
+var natch_pop = 37026;
 var orleans_pop = ;
 var ouach_pop = ;
 var plaque_pop = ;
@@ -213,7 +213,9 @@ var wc_pop = ;
 var wf_pop = ;
 var winn_pop =;
 
-console.log("Current Covid-19 deaths by parish: Acadia: ");
+var acadia_dph = acadia / acadia_pop * 100000
+
+console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph);
 
 // control that shows parish info on hover
 	const info = L.control();
