@@ -213,7 +213,71 @@ var wc_pop = 9594;
 var wf_pop = 15494;
 var winn_pop = 13488;
 
-var acadia_dph = acadia / acadia_pop * 100000
+var acadia_dph = (acadia / acadia_pop * 100000).toFixed(2);
+var allen_dph = (allen / allen_pop * 100000).toFixed(2);
+var asc_dph = (asc / asc_pop * 100000).toFixed(2);
+var assumption_dph = (assumption / assumption_pop * 100000).toFixed(2);
+var avoyelles_dph = (avoyelles / avoyelles_pop * 100000).toFixed(2);
+var beau_dph = (beau / beau_pop * 100000).toFixed(2);
+var bien_dph = (bien / bien_pop * 100000).toFixed(2);
+var bossier_dph = (bossier / bossier_pop * 100000).toFixed(2);
+var caddo_dph = (caddo / caddo_pop * 100000).toFixed(2);
+var calc_dph = (calc / calc_pop * 100000).toFixed(2);
+var caldwell_dph = ( /  * 100000).toFixed(2);
+var cameron_dph = ( /  * 100000).toFixed(2);
+var cat_dph = ( /  * 100000).toFixed(2);
+var claiborne_dph = ( /  * 100000).toFixed(2);
+var concordia_dph = ( /  * 100000).toFixed(2);
+var desoto_dph = ( /  * 100000).toFixed(2);
+var ebr_dph = ( /  * 100000).toFixed(2);
+var ec_dph = ( /  * 100000).toFixed(2);
+var ef_dph = ( /  * 100000).toFixed(2);
+var evangeline_dph = ( /  * 100000).toFixed(2);
+var franklin_dph = ( /  * 100000).toFixed(2);
+var grant_dph = ( /  * 100000).toFixed(2);
+var iberia_dph = ( /  * 100000).toFixed(2);
+var iberville_dph = ( /  * 100000).toFixed(2);
+var jackson_dph = ( /  * 100000).toFixed(2);
+var jefferson_dph = ( /  * 100000).toFixed(2);
+var jd_dph = ( /  * 100000).toFixed(2);
+var lafayette_dph = ( /  * 100000).toFixed(2);
+var lafourche_dph = ( /  * 100000).toFixed(2);
+var lasalle_dph = ( /  * 100000).toFixed(2);
+var lincoln_dph = ( /  * 100000).toFixed(2);
+var livingston_dph = ( /  * 100000).toFixed(2);
+var madison_dph = ( /  * 100000).toFixed(2);
+var more_dph = ( /  * 100000).toFixed(2);
+var natch_dph = ( /  * 100000).toFixed(2);
+var orleans_dph = ( /  * 100000).toFixed(2);
+var ouach_dph = ( /  * 100000).toFixed(2);
+var plaque_dph = ( /  * 100000).toFixed(2);
+var pc_dph = ( /  * 100000).toFixed(2);
+var rapides_dph = ( /  * 100000).toFixed(2);
+var rr_dph = ( /  * 100000).toFixed(2);
+var rich_dph = ( /  * 100000).toFixed(2);
+var sabine_dph = ( /  * 100000).toFixed(2);
+var sb_dph = ( /  * 100000).toFixed(2);
+var sc_dph = ( /  * 100000).toFixed(2);
+var sh_dph = ( /  * 100000).toFixed(2);
+var sj_dph = ( /  * 100000).toFixed(2);
+var sjb_dph = ( /  * 100000).toFixed(2);
+var sl_dph = ( /  * 100000).toFixed(2);
+var sm_dph = ( /  * 100000).toFixed(2);
+var stmary_dph = ( /  * 100000).toFixed(2);
+var st_dph = ( /  * 100000).toFixed(2);
+var tang_dph = ( /  * 100000).toFixed(2);
+var tensas_dph = ( /  * 100000).toFixed(2);
+var terr_dph = ( /  * 100000).toFixed(2);
+var union_dph = ( /  * 100000).toFixed(2);
+var vermilion_dph = ( /  * 100000).toFixed(2);
+var vernon_dph = ( /  * 100000).toFixed(2);
+var wash_dph = ( /  * 100000).toFixed(2);
+var webster_dph = ( /  * 100000).toFixed(2);
+var wbr_dph = ( /  * 100000).toFixed(2);
+var wc_dph = ( /  * 100000).toFixed(2);
+var wf_dph = ( /  * 100000).toFixed(2);
+var winn_dph = ( /  * 100000).toFixed(2);
+
 
 console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph);
 
@@ -272,7 +336,7 @@ console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph);
 	}
 
 	/* global la_par */
-	const geojson = L.geoJson(la_par, {
+	const geojson = L.geoJson(parishes, {
 		style,
 		onEachFeature
 	}).addTo(map);
