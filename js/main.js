@@ -252,7 +252,7 @@ console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph);
 			color: 'white',
 			dashArray: '3',
 			fillOpacity: 0.7,
-			fillColor: getColor(feature.properties.density)
+			fillColor: getColor(feature.properties.cd)
 		};
 	}
 
@@ -294,7 +294,7 @@ console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph);
 		});
 	}
 
-	map.attributionControl.addAttribution('Covid-19 deaths data &copy; <a href="http://cdc.gov/">CDC</a>''Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
+	map.attributionControl.addAttribution("Covid-19 deaths data &copy; <a href='http://cdc.gov/'>CDC</a>" "Population data &copy; <a href='http://census.gov/'>US Census Bureau</a>");
 
 	const legend = L.control({position: 'bottomright'});
 
