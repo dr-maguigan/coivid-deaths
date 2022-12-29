@@ -61,7 +61,7 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 	/* global la_par */
 	const geojson = L.geoJson(parishes, {
-		style,
+		style: style,
 		onEachFeature
 	}).addTo(map);
 
