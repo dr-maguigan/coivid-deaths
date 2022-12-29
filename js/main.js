@@ -27,10 +27,12 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 	// get color depending on deaths
 	function getColor(d) {
-		return 	d > 1000  ? '#FC4E2A' :
-			d > 500   ? '#FD8D3C' :
-			d > 250   ? '#FEB24C' :
-			d > 100   ? '#FED976' : '#FFEDA0';
+		return 	d > 750 ? '#E31A1C' :
+           		d > 500 ? '#FC4E2A' :
+           		d > 250 ? '#FD8D3C' :
+           		d > 100 ? '#FEB24C' :
+           		d > 10  ? '#FED976' :
+                      		  '#FFEDA0';
 	}
 
 	function style(feature) {
@@ -89,7 +91,7 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	legend.onAdd = function (map) {
 
 		const div = L.DomUtil.create('div', 'info legend');
-		const grades = [0, 100, 250, 500, 1000];
+		const grades = [0, 10, 100, 250, 500, 750];
 		const labels = [];
 		let from, to;
 
@@ -394,7 +396,7 @@ var winn_dph = (winn / winn_pop * 100000).toFixed(2);
 
 //create array for table
 let deaths = [
-	{Parish: "Acadia", Deaths: acadia_dph}, {Parish: "Allen", Deaths: allen_dph}, {Parish:  "Ascension", Deaths: asc_dph}, {Parish:  "Assumption", Deaths: assumption_dph}, {Parish:  "Avoyelles", Deaths: avoyelles_dph}, {Parish:  "Beauregard", Deaths: beau_dph}, {Parish:  "Bienville", Deaths: bien_dph}, {Parish:  "Bossier", Deaths: bossier_dph}, {Parish:  "Caddo", Deaths: caddo_dph}, {Parish:  "Calcasieu", Deaths: calc_dph}, {Parish:  "Caldwell", Deaths: caldwell_dph}, {Parish:  "Cameron", Deaths: cameron_dph}, {Parish:  "Catahoula", Deaths: cat_dph}, {Parish:  "Claiborne", Deaths: claiborne_dph}, {Parish:  "Concordia", Deaths: concordia_dph}, {Parish:  "DeSoto", Deaths: desoto_dph}, {Parish:  "East Baton Rouge", Deaths: ebr_dph}, {Parish:  "East Carroll", Deaths: ec_dph}, {Parish:  "East Feliciana", Deaths: ef_dph}, {Parish:  "Evangeline", Deaths: evangeline_dph}, {Parish:  "Franklin", Deaths: franklin_dph}, {Parish:  "Grant", Deaths: grant_dph}, {Parish:  "Iberia", Deaths: iberia_dph}, {Parish:  "Iberville", Deaths: iberville_dph}, {Parish:  "Jackson", Deaths: jackson_dph}, {Parish:  "Jefferson", Deaths: jefferson_dph}, {Parish:  "Jefferson Davis", Deaths: jd_dph}, {Parish:  "Lafayette", Deaths: lafayette_dph}, {Parish:  "Lafourche", Deaths: lafourche_dph}, {Parish:  "LaSalle", Deaths: lasalle_dph}, {Parish:  "Lincoln", Deaths: lincoln_dph}, {Parish:  "Livingston", Deaths: livingston_dph}, {Parish:  "Madison", Deaths: madison_dph}, {Parish:  "Morehouse", Deaths: more_dph}, {Parish:  "Natchitoches", Deaths: natch_dph}, {Parish:  "Orleans", Deaths: orleans_dph}, {Parish:  "Ouachita", Deaths: ouach_dph}, {Parish:  "Plaquemines", Deaths: plaque_dph}, {Parish:  "Pointe Coupee", Deaths: pc_dph}, {Parish:  "Rapides", Deaths: rapides_dph}, {Parish:  "Red River", Deaths: rr_dph}, {Parish:  "Richland", Deaths: rich_dph}, {Parish:  "Sabine", Deaths: sabine_dph}, {Parish:  "St. Bernard", Deaths: sb_dph}, {Parish:  "St. Charles", Deaths: sc_dph}, {Parish:  "St. Helena", Deaths: sh_dph}, {Parish:  "St. James", Deaths: sj_dph}, {Parish:  "St. John the Baptist", Deaths: sjb_dph}, {Parish:  "St. Landry", Deaths: sl_dph}, {Parish:  "St. Martin", Deaths: sm_dph}, {Parish:  "St. Mary", Deaths: stmary_dph}, {Parish:  "St. Tammany", Deaths: st_dph}, {Parish:  "Tangipahoa", Deaths: tang_dph}, {Parish:  "Tensas", Deaths: tensas_dph}, {Parish:  "Terrebonne", Deaths: terr_dph}, {Parish:  "Union", Deaths: union_dph}, {Parish:  "Vermilion", Deaths: vermilion_dph}, {Parish:  "Vernon", Deaths: vernon_dph}, {Parish:  "Washington", Deaths: wash_dph}, {Parish:  "Webster", Deaths: webster_dph}, {Parish:  "West Baton Rouge", Deaths: wbr_dph}, {Parish:  "West Carroll", Deaths: wc_dph}, {Parish:  "West Feliciana", Deaths: wf_dph}, {Parish:  "Winn", Deaths: winn_dph}
+	{Parish: "Acadia", Deaths: acadia_dph}, {Parish: "Allen", Deaths: allen_dph}, {Parish:  "Ascension", Deaths: asc_dph}, {Parish:  "Assumption", Deaths: assumption_dph}, {Parish:  "Avoyelles", Deaths: avoyelles_dph}, {Parish:  "Beauregard", Deaths: beau_dph}, {Parish:  "Bienville", Deaths: bien_dph}, {Parish:  "Bossier", Deaths: bossier_dph}, {Parish:  "Caddo", Deaths: caddo_dph}, {Parish:  "Calcasieu", Deaths: calc_dph}, {Parish:  "Caldwell", Deaths: caldwell_dph}, {Parish:  "Catahoula", Deaths: cat_dph}, {Parish:  "Claiborne", Deaths: claiborne_dph}, {Parish:  "Concordia", Deaths: concordia_dph}, {Parish:  "DeSoto", Deaths: desoto_dph}, {Parish:  "East Baton Rouge", Deaths: ebr_dph}, {Parish:  "East Feliciana", Deaths: ef_dph}, {Parish:  "Evangeline", Deaths: evangeline_dph}, {Parish:  "Franklin", Deaths: franklin_dph}, {Parish:  "Grant", Deaths: grant_dph}, {Parish:  "Iberia", Deaths: iberia_dph}, {Parish:  "Iberville", Deaths: iberville_dph}, {Parish:  "Jackson", Deaths: jackson_dph}, {Parish:  "Jefferson", Deaths: jefferson_dph}, {Parish:  "Jefferson Davis", Deaths: jd_dph}, {Parish:  "Lafayette", Deaths: lafayette_dph}, {Parish:  "Lafourche", Deaths: lafourche_dph}, {Parish:  "LaSalle", Deaths: lasalle_dph}, {Parish:  "Lincoln", Deaths: lincoln_dph}, {Parish:  "Livingston", Deaths: livingston_dph}, {Parish:  "Madison", Deaths: madison_dph}, {Parish:  "Morehouse", Deaths: more_dph}, {Parish:  "Natchitoches", Deaths: natch_dph}, {Parish:  "Orleans", Deaths: orleans_dph}, {Parish:  "Ouachita", Deaths: ouach_dph},{Parish:  "Pointe Coupee", Deaths: pc_dph}, {Parish:  "Rapides", Deaths: rapides_dph}, {Parish:  "Red River", Deaths: rr_dph}, {Parish:  "Richland", Deaths: rich_dph}, {Parish:  "Sabine", Deaths: sabine_dph}, {Parish:  "St. Bernard", Deaths: sb_dph}, {Parish:  "St. Charles", Deaths: sc_dph}, {Parish:  "St. James", Deaths: sj_dph}, {Parish:  "St. John the Baptist", Deaths: sjb_dph}, {Parish:  "St. Landry", Deaths: sl_dph}, {Parish:  "St. Martin", Deaths: sm_dph}, {Parish:  "St. Mary", Deaths: stmary_dph}, {Parish:  "St. Tammany", Deaths: st_dph}, {Parish:  "Tangipahoa", Deaths: tang_dph}, {Parish:  "Terrebonne", Deaths: terr_dph}, {Parish:  "Union", Deaths: union_dph}, {Parish:  "Vermilion", Deaths: vermilion_dph}, {Parish:  "Vernon", Deaths: vernon_dph}, {Parish:  "Washington", Deaths: wash_dph}, {Parish:  "Webster", Deaths: webster_dph}, {Parish:  "West Baton Rouge", Deaths: wbr_dph}, {Parish:  "West Carroll", Deaths: wc_dph}, {Parish:  "West Feliciana", Deaths: wf_dph}, {Parish:  "Winn", Deaths: winn_dph}
 ];
 
 function generateTableHead(table, data) {
