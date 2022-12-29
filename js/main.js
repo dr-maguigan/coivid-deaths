@@ -300,13 +300,10 @@ console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph + "<br>Al
 
 	// get color depending on deaths
 	function getColor(d) {
-		return d > 1000 ? '#800026' :
-			d > 500  ? '#BD0026' :
-			d > 200  ? '#E31A1C' :
-			d > 100  ? '#FC4E2A' :
-			d > 50   ? '#FD8D3C' :
-			d > 20   ? '#FEB24C' :
-			d > 10   ? '#FED976' : '#FFEDA0';
+		return 	d > 1000  ? '#FC4E2A' :
+			d > 500   ? '#FD8D3C' :
+			d > 250   ? '#FEB24C' :
+			d > 100   ? '#FED976' : '#FFEDA0';
 	}
 
 	function style(feature) {
@@ -365,7 +362,7 @@ console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph + "<br>Al
 	legend.onAdd = function (map) {
 
 		const div = L.DomUtil.create('div', 'info legend');
-		const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
+		const grades = [0, 100, 250, 500, 1000];
 		const labels = [];
 		let from, to;
 
