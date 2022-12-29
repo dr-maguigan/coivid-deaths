@@ -8,7 +8,120 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     				maxZoom: 13,
    				attribution: '© OpenStreetMap'}).addTo(map);
 
-//create global variables for each parish and retrieve information, assign it to the global variable
+// control that shows parish info on hover
+	const info = L.control();
+
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+
+	info.update = function (props) {
+		const contents = props ? `<b>${props.NAMELSAD}</b><br />${props.cd} Covid-19 deaths / 100,000` : 'Hover over a parish';
+		this._div.innerHTML = `<h4>Covid-19 Deaths per 100,000</h4>${contents}`;
+	};
+
+	info.addTo(map);
+
+
+	// get color depending on deaths
+	function getColor(d) {
+		return 	d > 1000  ? '#FC4E2A' :
+			d > 500   ? '#FD8D3C' :
+			d > 250   ? '#FEB24C' :
+			d > 100   ? '#FED976' : '#FFEDA0';
+	}
+
+	function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.cd)
+		};
+	}
+
+	function highlightFeature(e) {
+		const layer = e.target;
+
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		layer.bringToFront();
+
+		info.update(layer.feature.properties);
+	}
+
+	/* global la_par */
+	const geojson = L.geoJson(parishes, {
+		style,
+		onEachFeature
+	}).addTo(map);
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+
+	map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC</a> Population data: <a href='http://census.gov/'>US Census Bureau</a>");
+
+	const legend = L.control({position: 'bottomright'});
+
+	legend.onAdd = function (map) {
+
+		const div = L.DomUtil.create('div', 'info legend');
+		const grades = [0, 100, 250, 500, 1000];
+		const labels = [];
+		let from, to;
+
+		for (let i = 0; i < grades.length; i++) {
+			from = grades[i];
+			to = grades[i + 1];
+
+			labels.push(`<i style="background:${getColor(from + 1)}"></i> ${from}${to ? `&ndash;${to}` : '+'}`);
+		}
+
+		div.innerHTML = labels.join('<br>');
+		return div;
+	};
+
+	legend.addTo(map);
+//create parishes geoJson and add to map
+var parishes =  new L.geoJson( '' );
+parishes.addTo(map);
+
+//define parish geojson from file
+$.ajax({
+	dataType: "json",
+	url: "data/la_par.json",
+	success: function(data) {
+		$(data.features).each(function(key, data) {
+			parishes.addData(data);
+			});
+		}
+}).error(function() {});
+
+//start table creation
+//create global variables for each parish and retrieve information, assign it to the global variable for table
 var acadia;
 var allen;
 var asc;
@@ -213,6 +326,7 @@ var wc_pop = 9594;
 var wf_pop = 15494;
 var winn_pop = 13488;
 
+//calculate deaths per 100k
 var acadia_dph = (acadia / acadia_pop * 100000).toFixed(2);
 var allen_dph = (allen / allen_pop * 100000).toFixed(2);
 var asc_dph = (asc / asc_pop * 100000).toFixed(2);
@@ -278,117 +392,34 @@ var wc_dph = (wc / wc_pop * 100000).toFixed(2);
 var wf_dph = (wf / wf_pop * 100000).toFixed(2);
 var winn_dph = (winn / winn_pop * 100000).toFixed(2);
 
+//create array for table
+let deaths = [
+	{Parish: "Acadia", Deaths per 100,000: acadia_dph}, {Parish: "Allen", Deaths per 100,000: allen_dph}, {Parish:  "Ascension", Deaths per 100,000: asc_dph}, {Parish:  "Assumption", Deaths per 100,000: assumption_dph}, {Parish:  "Avoyelles", Deaths per 100,000: avoyelles_dph}, {Parish:  "Beauregard", Deaths per 100,000: beau_dph}, {Parish:  "Bienville", Deaths per 100,000: bien_dph}, {Parish:  "Bossier", Deaths per 100,000: bossier_dph}, {Parish:  "Caddo", Deaths per 100,000: caddo_dph}, {Parish:  "Calcasieu", Deaths per 100,000: calc_dph}, {Parish:  "Caldwell", Deaths per 100,000: caldwell_dph}, {Parish:  "Cameron", Deaths per 100,000: cameron_dph}, {Parish:  "Catahoula", Deaths per 100,000: cat_dph}, {Parish:  "Claiborne", Deaths per 100,000: claiborne_dph}, {Parish:  "Concordia", Deaths per 100,000: concordia_dph}, {Parish:  "DeSoto", Deaths per 100,000: desoto_dph}, {Parish:  "East Baton Rouge", Deaths per 100,000: ebr_dph}, {Parish:  "East Carroll", Deaths per 100,000: ec_dph}, {Parish:  "East Feliciana", Deaths per 100,000: ef_dph}, {Parish:  "Evangeline", Deaths per 100,000: evangeline_dph}, {Parish:  "Franklin", Deaths per 100,000: franklin_dph}, {Parish:  "Grant", Deaths per 100,000: grant_dph}, {Parish:  "Iberia", Deaths per 100,000: iberia_dph}, {Parish:  "Iberville", Deaths per 100,000: iberville_dph}, {Parish:  "Jackson", Deaths per 100,000: jackson_dph}, {Parish:  "Jefferson", Deaths per 100,000: jefferson_dph}, {Parish:  "Jefferson Davis", Deaths per 100,000: jd_dph}, {Parish:  "Lafayette", Deaths per 100,000: lafayette_dph}, {Parish:  "Lafourche", Deaths per 100,000: lafourche_dph}, {Parish:  "LaSalle", Deaths per 100,000: lasalle_dph}, {Parish:  "Lincoln", Deaths per 100,000: lincoln_dph}, {Parish:  "Livingston", Deaths per 100,000: livingston_dph}, {Parish:  "Madison", Deaths per 100,000: madison_dph}, {Parish:  "Morehouse", Deaths per 100,000: more_dph}, {Parish:  "Natchitoches", Deaths per 100,000: natch_dph}, {Parish:  "Orleans", Deaths per 100,000: orleans_dph}, {Parish:  "Ouachita", Deaths per 100,000: ouach_dph}, {Parish:  "Plaquemines", Deaths per 100,000: plaque_dph}, {Parish:  "Pointe Coupee", Deaths per 100,000: pc_dph}, {Parish:  "Rapides", Deaths per 100,000: rapides_dph}, {Parish:  "Red River", Deaths per 100,000: rr_dph}, {Parish:  "Richland", Deaths per 100,000: rich_dph}, {Parish:  "Sabine", Deaths per 100,000: sabine_dph}, {Parish:  "St. Bernard", Deaths per 100,000: sb_dph}, {Parish:  "St. Charles", Deaths per 100,000: sc_dph}, {Parish:  "St. Helena", Deaths per 100,000: sh_dph}, {Parish:  "St. James", Deaths per 100,000: sj_dph}, {Parish:  "St. John the Baptist", Deaths per 100,000: sjb_dph}, {Parish:  "St. Landry", Deaths per 100,000: sl_dph}, {Parish:  "St. Martin", Deaths per 100,000: sm_dph}, {Parish:  "St. Mary", Deaths per 100,000: stmary_dph}, {Parish:  "St. Tammany", Deaths per 100,000: st_dph}, {Parish:  "Tangipahoa", Deaths per 100,000: tang_dph}, {Parish:  "Tensas", Deaths per 100,000: tensas_dph}, {Parish:  "Terrebonne", Deaths per 100,000: terr_dph}, {Parish:  "Union", Deaths per 100,000: union_dph}, {Parish:  "Vermilion", Deaths per 100,000: vermilion_dph}, {Parish:  "Vernon", Deaths per 100,000: vernon_dph}, {Parish:  "Washington", Deaths per 100,000: wash_dph}, {Parish:  "Webster", Deaths per 100,000: webster_dph}, {Parish:  "West Baton Rouge", Deaths per 100,000: wbr_dph}, {Parish:  "West Carroll", Deaths per 100,000: wc_dph}, {Parish:  "West Feliciana", Deaths per 100,000: wf_dph}, {Parish:  "Winn", Deaths per 100,000: winn_dph}
+];
 
-console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph + "<br>Allen:: " + allen_dph);
-
-// control that shows parish info on hover
-	const info = L.control();
-
-	info.onAdd = function (map) {
-		this._div = L.DomUtil.create('div', 'info');
-		this.update();
-		return this._div;
-	};
-
-	info.update = function (props) {
-		const contents = props ? `<b>${props.NAMELSAD}</b><br />${props.cd} Covid-19 deaths / 100,000` : 'Hover over a parish';
-		this._div.innerHTML = `<h4>Covid-19 Deaths per 100,000</h4>${contents}`;
-	};
-
-	info.addTo(map);
-
-
-	// get color depending on deaths
-	function getColor(d) {
-		return 	d > 1000  ? '#FC4E2A' :
-			d > 500   ? '#FD8D3C' :
-			d > 250   ? '#FEB24C' :
-			d > 100   ? '#FED976' : '#FFEDA0';
+function generateTableHead(table, data) {
+	let head = table.createTableHead();
+	let row = thead.insertRow();
+	for (let key of data) {
+		let th = document.createElement("th");
+		let text = document.createTextNode(key);
+		th.appendChild(text);
+		row.appendChild(th);
 	}
+}
 
-	function style(feature) {
-		return {
-			weight: 2,
-			opacity: 1,
-			color: 'white',
-			dashArray: '3',
-			fillOpacity: 0.7,
-			fillColor: getColor(feature.properties.cd)
-		};
+function generateTable(table, data) {
+	for (let element of data) {
+		let row = table.insertRow();
+		for (key in element) {
+			let cell = row.insertCell();
+			let text = document.createTextNode(element[key]);
+			cell.appendChild(text);
+		}	
 	}
+}
 
-	function highlightFeature(e) {
-		const layer = e.target;
-
-		layer.setStyle({
-			weight: 5,
-			color: '#666',
-			dashArray: '',
-			fillOpacity: 0.7
-		});
-
-		layer.bringToFront();
-
-		info.update(layer.feature.properties);
-	}
-
-	/* global la_par */
-	const geojson = L.geoJson(parishes, {
-		style,
-		onEachFeature
-	}).addTo(map);
-
-	function resetHighlight(e) {
-		geojson.resetStyle(e.target);
-		info.update();
-	}
-
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-	}
-
-	map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC</a> Population data: <a href='http://census.gov/'>US Census Bureau</a>");
-
-	const legend = L.control({position: 'bottomright'});
-
-	legend.onAdd = function (map) {
-
-		const div = L.DomUtil.create('div', 'info legend');
-		const grades = [0, 100, 250, 500, 1000];
-		const labels = [];
-		let from, to;
-
-		for (let i = 0; i < grades.length; i++) {
-			from = grades[i];
-			to = grades[i + 1];
-
-			labels.push(`<i style="background:${getColor(from + 1)}"></i> ${from}${to ? `&ndash;${to}` : '+'}`);
-		}
-
-		div.innerHTML = labels.join('<br>');
-		return div;
-	};
-
-	legend.addTo(map);
-//create parishes geoJson and add to map
-var parishes =  new L.geoJson( '' );
-parishes.addTo(map);
-
-//define parish geojson from file
-$.ajax({
-	dataType: "json",
-	url: "data/la_par.json",
-	success: function(data) {
-		$(data.features).each(function(key, data) {
-			parishes.addData(data);
-			});
-		}
-}).error(function() {});
+let table = document.querySelector("table");
+let data = Object.keys(deaths[0]);
+generateTable(table, deaths);
+generateTableHead(table, data);
