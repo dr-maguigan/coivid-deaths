@@ -378,6 +378,9 @@ console.log("Current Covid-19 deaths by parish: Acadia: " + acadia_dph + "<br>Al
 	};
 
 	legend.addTo(map);
+//create parishes geoJson and add to map
+var parishes =  new L.geoJson( '' );
+parishes.addTo(map);
 
 //define parish geojson from file
 $.ajax({
