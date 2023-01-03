@@ -7,8 +7,9 @@ var map = L.map('map', {
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     				maxZoom: 13,
    				attribution: '© OpenStreetMap'}).addTo(map);
+var geojson;
 
-// control that shows parish info on hover
+	// control that shows parish info on hover
 	const info = L.control();
 
 	info.onAdd = function (map) {
@@ -19,7 +20,7 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 	info.update = function (props) {
 		const contents = props ? '<b>${props.NAMELSAD}</b><br />${props.cd} Covid-19 deaths / 100,000' : 'Hover over a parish';
-		this._div.innerHTML = `<h4>Covid-19 Deaths per 100,000</h4>${contents}`;
+		this._div.innerHTML = '<h4>Covid-19 Deaths per 100,000</h4>${contents}';
 	};
 
 	info.addTo(map);
@@ -61,12 +62,6 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		info.update(layer.feature.properties);
 	}
 
-	/* global la_par */
-	const geojson = L.geoJson(parishes, {
-		style: style,
-		onEachFeature: onEachFeature
-	}).addTo(map);
-
 	function resetHighlight(e) {
 		geojson.resetStyle(e.target);
 		info.update();
@@ -83,6 +78,12 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			click: zoomToFeature
 		});
 	}
+
+	//global parishes with style and oneachfeature functions
+	var geojson = L.geoJson(parishes, {
+		style: style,
+		onEachFeature: onEachFeature
+	}).addTo(map);
 
 	map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC</a> Population data: <a href='http://census.gov/'>US Census Bureau</a>");
 
