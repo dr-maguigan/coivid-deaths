@@ -18,7 +18,7 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	};
 
 	info.update = function (props) {
-		const contents = props ? `<b>${props.NAMELSAD}</b><br />${props.cd} Covid-19 deaths / 100,000` : 'Hover over a parish';
+		const contents = props ? '<b>${props.NAMELSAD}</b><br />${props.cd} Covid-19 deaths / 100,000' : 'Hover over a parish';
 		this._div.innerHTML = `<h4>Covid-19 Deaths per 100,000</h4>${contents}`;
 	};
 
