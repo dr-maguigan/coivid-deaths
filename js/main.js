@@ -38,8 +38,7 @@ function style(feature) {
 		return {
 			weight: 2,
 			opacity: 1,
-			color: 'white',
-			dashArray: '3',
+			color: '#d3d3d3',
 			fillOpacity: 0.7,
 			fillColor: getColor(feature.properties.cd)
 		};
@@ -52,7 +51,6 @@ function highlightFeature(e) {
 		layer.setStyle({
 			weight: 5,
 			color: '#666',
-			dashArray: '',
 			fillOpacity: 0.7
 		});
 
