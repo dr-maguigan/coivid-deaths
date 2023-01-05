@@ -113,14 +113,11 @@ legend.onAdd = function (map) {
 		from = grades[i];
 		to = grades[i + 1];
 		
-		labels.push('<i style="background:${getColor(from + 1)}"></i> ${from}${to ? '&ndash;${to}' : '+'}');
+		labels.push("<i style='background:${getColor(from + 1)}'></i> ${from}${to ? "&ndash;${to}" : "+"}");
 		}
 		
     	return div;
 };
-
-
-
 
 		for (let i = 0; i < grades.length; i++) {
 			from = grades[i];
