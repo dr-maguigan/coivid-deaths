@@ -1,6 +1,6 @@
 //add map centered on Louisiana
 var map = L.map('map', {
-	center: [30.4843, -92.7623],
+	center: [30.2843, -92.7623],
 	zoom: 7.35
 });
 //add openstreetmap tilelayer
