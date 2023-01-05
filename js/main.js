@@ -7,9 +7,8 @@ var map = L.map('map', {
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     				maxZoom: 13,
    				attribution: '© OpenStreetMap'}).addTo(map);
-var geojson;
 
-	// control that shows parish info on hover
+// control that shows parish info on hover
 	const info = L.control();
 
 	info.onAdd = function (map) {
@@ -25,8 +24,7 @@ var geojson;
 
 	info.addTo(map);
 
-
-	// get color depending on deaths
+// get color depending on deaths
 	function getColor(d) {
 		return 	d > 750 ? '#E31A1C' :
            		d > 500 ? '#FC4E2A' :
@@ -36,7 +34,8 @@ var geojson;
                       		  '#FFEDA0';
 	}
 
-	function style(feature) {
+//set style for geojson
+function style(feature) {
 		return {
 			weight: 2,
 			opacity: 1,
@@ -47,7 +46,8 @@ var geojson;
 		};
 	}
 
-	function highlightFeature(e) {
+//create highlight function
+function highlightFeature(e) {
 		const layer = e.target;
 
 		layer.setStyle({
@@ -58,12 +58,29 @@ var geojson;
 		});
 
 		layer.bringToFront();
-
+	
 		info.update(layer.feature.properties);
 	}
 
-	function resetHighlight(e) {
-		geojson.resetStyle(e.target);
+//create parishes geojson and add to map
+var parishes =  new L.geoJson( '', {
+	style: style,
+		onEachFeature: onEachFeature});
+parishes.addTo(map);
+
+//define parish geojson from file
+$.ajax({
+	dataType: "json",
+	url: "data/la_par.json",
+	success: function(data) {
+		$(data.features).each(function(key, data) {
+			parishes.addData(data);
+			});
+		}
+}).error(function() {});
+
+function resetHighlight(e) {
+		parishes.resetStyle(e.target);
 		info.update();
 	}
 
@@ -78,12 +95,6 @@ var geojson;
 			click: zoomToFeature
 		});
 	}
-
-	//global parishes with style and oneachfeature functions
-	var geojson = L.geoJson(parishes, {
-		style: style,
-		onEachFeature: onEachFeature
-	}).addTo(map);
 
 	map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC</a> Population data: <a href='http://census.gov/'>US Census Bureau</a>");
 
@@ -100,7 +111,7 @@ var geojson;
 			from = grades[i];
 			to = grades[i + 1];
 
-			labels.push(`<i style="background:${getColor(from + 1)}"></i> ${from}${to ? `&ndash;${to}` : '+'}`);
+			labels.push(`<i style="background:${getColor(from + 1)}"></i> ${from}${to ? '&ndash;${to}' : '+'}`);
 		}
 
 		div.innerHTML = labels.join('<br>');
@@ -108,17 +119,3 @@ var geojson;
 	};
 
 	legend.addTo(map);
-//create parishes geoJson and add to map
-var parishes =  new L.geoJson( '' );
-parishes.addTo(map);
-
-//define parish geojson from file
-$.ajax({
-	dataType: "json",
-	url: "data/la_par.json",
-	success: function(data) {
-		$(data.features).each(function(key, data) {
-			parishes.addData(data);
-			});
-		}
-}).error(function() {});
