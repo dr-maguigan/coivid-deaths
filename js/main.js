@@ -6,7 +6,7 @@ var map = L.map('map', {
 //add openstreetmap tilelayer
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     				maxZoom: 13,
-   				attribution: '© OpenStreetMap'}).addTo(map);
+   				attribution: '© OpenStreetMap | Covid-19 data: <a href="http://cdc.gov/" target="_blank" rel="noopener noreferrer">CDC</a>| Population data: <a href="http://census.gov/" target="_blank" rel="noopener noreferrer">US Census Bureau</a>'}).addTo(map);
 
 // control that shows parish info on hover
 	var info = L.control();
@@ -95,9 +95,6 @@ function onEachFeature(feature, layer) {
 		click: zoomToFeature
 		});
 	}
-
-//add map attribution
-map.attributionControl.addAttribution("Covid-19 data: <a href='http://cdc.gov/'>CDC</a>| Population data: <a href='http://census.gov/'>US Census Bureau</a>");
 
 //create legend in bottom right of map
 var legend = L.control({position: 'bottomright'});
