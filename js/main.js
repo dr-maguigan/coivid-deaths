@@ -97,7 +97,7 @@ function onEachFeature(feature, layer) {
 	}
 
 //add map attribution
-map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC</a>| Population data: <a href='http://census.gov/'>US Census Bureau</a>");
+map.attributionControl.addAttribution("Covid-19 data: <a href='http://cdc.gov/'>CDC</a>| Population data: <a href='http://census.gov/'>US Census Bureau</a>");
 
 //create legend in bottom right of map
 var legend = L.control({position: 'bottomright'});
