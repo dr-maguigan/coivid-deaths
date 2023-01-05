@@ -97,24 +97,19 @@ function resetHighlight(e) {
 
 	map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC</a> Population data: <a href='http://census.gov/'>US Census Bureau</a>");
 
-	const legend = L.control({position: 'bottomright'});
+	var legend = L.control({position: 'bottomright'});
 
 	legend.onAdd = function (map) {
 
-		const div = L.DomUtil.create('div', 'info legend');
-		const grades = [0, 10, 100, 250, 500, 750];
-		const labels = [];
-		let from, to;
+		var div = L.DomUtil.create('div', 'info legend'),
+		grades = [0, 10, 100, 250, 500, 750],
+		labels = [];
 
-		for (let i = 0; i < grades.length; i++) {
-			from = grades[i];
-			to = grades[i + 1];
-
-			labels.push(`<i style="background:${getColor(from + 1)}"></i> ${from}${to ? '&ndash;${to}' : '+'}`);
-		}
-
-		div.innerHTML = labels.join('<br>');
-		return div;
+		for (var i = 0; i < grades.length; i++) {
+			'<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            		grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    		}
+    		return div;
 	};
 
 	legend.addTo(map);
