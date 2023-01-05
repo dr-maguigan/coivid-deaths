@@ -75,7 +75,316 @@
   		<script type="text/javascript" src="js/main.js"></script>
 	<p>Deaths are reported in deaths per 100,000. Missing parishes had data redacted to protect confidentiality due to low counts</p>
 	<table>
+  		<tr>
+    		<td>Parish</td>
+    		<td>Deaths</td>
+  		</tr>
 	</table>
+	<script>
+		//start table creation
+		//create global variables for each parish and retrieve information, assign it to the global variable for table
+var acadia;
+var allen;
+var asc;
+var assumption;
+var avoyelles;
+var beau;
+var bien;
+var bossier;
+var caddo;
+var calc;
+var caldwell;
+var cameron;
+var cat;
+var claiborne;
+var concordia;
+var desoto;
+var ebr;
+var ec;
+var ef;
+var evangeline;
+var franklin;
+var grant;
+var iberia;
+var iberville;
+var jackson;
+var jefferson;
+var jd;
+var lafayette;
+var lafourche;
+var lasalle;
+var lincoln;
+var livingston;
+var madison;
+var more;
+var natch;
+var orleans;
+var ouach;
+var plaque;
+var pc;
+var rapides;
+var rr;
+var rich;
+var sabine;
+var sb;
+var sc;
+var sh;
+var sj;
+var sjb;
+var sl;
+var sm;
+var stmary;
+var st;
+var tang;
+var tensas;
+var terr;
+var union;
+var vermilion;
+var vernon;
+var wash;
+var webster;
+var wbr;
+var wc;
+var wf;
+var winn;
+$.ajax({
+    type: "GET",
+    url: "https://data.cdc.gov/resource/kn79-hsxy.json?$limit=5000",
+    dataType: 'json',
+    async: false,
+    data: $(this).serialize(),
+    success: function(data) {
+	    acadia = (data[1100].covid_death);
+	    allen = (data[1101].covid_death);
+	    asc = (data[1102].covid_death);
+	    assumption = (data[1103].covid_death);
+	    avoyelles = (data[1104].covid_death);
+	    beau = (data[1105].covid_death);
+	    bien = (data[1106].covid_death);
+	    bossier = (data[1107].covid_death);
+	    caddo = (data[1108].covid_death);
+	    calc = (data[1109].covid_death);
+	    caldwell = (data[1110].covid_death);
+	    cameron = (data[1111].covid_death);
+	    cat = (data[1112].covid_death);
+	    claiborne = (data[1113].covid_death);
+	    concordia = (data[1114].covid_death);
+	    desoto = (data[1115].covid_death);
+	    ebr = (data[1116].covid_death);
+	    ec = (data[1117].covid_death);
+	    ef = (data[1118].covid_death);
+	    evangeline = (data[1119].covid_death);
+	    franklin = (data[1120].covid_death);
+	    grant = (data[1121].covid_death);
+	    iberia = (data[1122].covid_death);
+	    iberville = (data[1123].covid_death);
+	    jackson = (data[1124].covid_death);
+	    jefferson = (data[1125].covid_death);
+	    jd = (data[1126].covid_death);
+	    lafayette = (data[1127].covid_death);
+	    lafourche = (data[1128].covid_death);
+	    lasalle = (data[1129].covid_death);
+	    lincoln = (data[1130].covid_death);
+	    livingston = (data[1131].covid_death);
+	    madison = (data[1132].covid_death);
+	    more = (data[1133].covid_death);
+	    natch = (data[1134].covid_death);
+	    orleans = (data[1135].covid_death);
+	    ouach = (data[1136].covid_death);
+	    plaque = (data[1137].covid_death);
+	    pc = (data[1138].covid_death);
+	    rapides = (data[1139].covid_death);
+	    rr = (data[1140].covid_death);
+	    rich = (data[1141].covid_death);
+	    sabine = (data[1142].covid_death);
+	    sb = (data[1143].covid_death);
+	    sc = (data[1144].covid_death);
+	    sh = (data[1145].covid_death);
+	    sj = (data[1146].covid_death);
+	    sjb = (data[1147].covid_death);
+	    sl = (data[1148].covid_death);
+	    sm = (data[1149].covid_death);
+	    stmary = (data[1150].covid_death);
+	    st = (data[1151].covid_death);
+	    tang = (data[1152].covid_death);
+	    tensas = (data[1153].covid_death);
+	    terr = (data[1154].covid_death);
+	    union = (data[1155].covid_death);
+	    vermilion = (data[1156].covid_death);
+	    vernon = (data[1157].covid_death);
+	    wash = (data[1158].covid_death);
+	    webster = (data[1159].covid_death);
+	    wbr = (data[1160].covid_death);
+	    wc = (data[1161].covid_death);
+	    wf = (data[1162].covid_death);
+	    winn = (data[1163].covid_death);
+    }
+});
+
+//add pop data
+var acadia_pop = 57288;
+var allen_pop = 22687;
+var asc_pop = 128369;
+var assumption_pop = 20689;
+var avoyelles_pop = 39236;
+var beau_pop = 36584;
+var bien_pop = 12776;
+var bossier_pop = 129144;
+var caddo_pop = 233092;
+var calc_pop = 205282;
+var caldwell_pop = 9571;
+var cameron_pop = 5080;
+var cat_pop = 8805;
+var claiborne_pop = 14038;
+var concordia_pop = 18376;
+var desoto_pop = 26919;
+var ebr_pop = 453301;
+var ec_pop = 7220;
+var ef_pop = 19338;
+var evangeline_pop = 32215;
+var franklin_pop = 19668;
+var grant_pop = 22236;
+var iberia_pop = 68975;
+var iberville_pop = 29824;
+var jackson_pop = 14876;
+var jefferson_pop = 433688;
+var jd_pop = 32345;
+var lafayette_pop = 244205;
+var lafourche_pop = 97504;
+var lasalle_pop = 14834;
+var lincoln_pop = 48152;
+var livingston_pop = 145830;
+var madison_pop = 9799;
+var more_pop = 25025;
+var natch_pop = 37026;
+var orleans_pop = 376971;
+var ouach_pop = 158768;
+var plaque_pop = 23303;
+var pc_pop = 20536;
+var rapides_pop = 128654;
+var rr_pop = 7564;
+var rich_pop = 19805;
+var sabine_pop = 22135;
+var sb_pop = 44258;
+var sc_pop = 52282;
+var sh_pop = 10912;
+var sj_pop = 19742;
+var sjb_pop = 42094;
+var sl_pop = 82071;
+var sm_pop = 51540;
+var stmary_pop = 48232;
+var st_pop = 269388;
+var tang_pop = 135217;
+var tensas_pop = 4043;
+var terr_pop = 108708;
+var union_pop = 21091;
+var vermilion_pop = 57204;
+var vernon_pop = 48207;
+var wash_pop = 45133;
+var webster_pop = 36184;
+var wbr_pop = 27792;
+var wc_pop = 9594;
+var wf_pop = 15494;
+var winn_pop = 13488;
+
+//calculate deaths per 100k
+var acadia_dph = (acadia / acadia_pop * 100000).toFixed(2);
+var allen_dph = (allen / allen_pop * 100000).toFixed(2);
+var asc_dph = (asc / asc_pop * 100000).toFixed(2);
+var assumption_dph = (assumption / assumption_pop * 100000).toFixed(2);
+var avoyelles_dph = (avoyelles / avoyelles_pop * 100000).toFixed(2);
+var beau_dph = (beau / beau_pop * 100000).toFixed(2);
+var bien_dph = (bien / bien_pop * 100000).toFixed(2);
+var bossier_dph = (bossier / bossier_pop * 100000).toFixed(2);
+var caddo_dph = (caddo / caddo_pop * 100000).toFixed(2);
+var calc_dph = (calc / calc_pop * 100000).toFixed(2);
+var caldwell_dph = (caldwell / caldwell_pop * 100000).toFixed(2);
+var cameron_dph = (cameron / cameron_pop * 100000).toFixed(2);
+var cat_dph = (cat / cat_pop * 100000).toFixed(2);
+var claiborne_dph = (claiborne / claiborne_pop * 100000).toFixed(2);
+var concordia_dph = (concordia / concordia_pop * 100000).toFixed(2);
+var desoto_dph = (desoto / desoto_pop * 100000).toFixed(2);
+var ebr_dph = (ebr / ebr_pop * 100000).toFixed(2);
+var ec_dph = (ec / ec_pop * 100000).toFixed(2);
+var ef_dph = (ef / ef_pop * 100000).toFixed(2);
+var evangeline_dph = (evangeline / evangeline_pop * 100000).toFixed(2);
+var franklin_dph = (franklin / franklin_pop * 100000).toFixed(2);
+var grant_dph = (grant / grant_pop * 100000).toFixed(2);
+var iberia_dph = (iberia / iberia_pop * 100000).toFixed(2);
+var iberville_dph = (iberville / iberville_pop * 100000).toFixed(2);
+var jackson_dph = (jackson / jackson_pop * 100000).toFixed(2);
+var jefferson_dph = (jefferson / jefferson_pop * 100000).toFixed(2);
+var jd_dph = (jd / jd_pop * 100000).toFixed(2);
+var lafayette_dph = (lafayette / lafayette_pop * 100000).toFixed(2);
+var lafourche_dph = (lafourche / lafourche_pop * 100000).toFixed(2);
+var lasalle_dph = (lasalle / lasalle_pop * 100000).toFixed(2);
+var lincoln_dph = (lincoln / lincoln_pop * 100000).toFixed(2);
+var livingston_dph = (livingston / livingston_pop * 100000).toFixed(2);
+var madison_dph = (madison / madison_pop * 100000).toFixed(2);
+var more_dph = (more / more_pop * 100000).toFixed(2);
+var natch_dph = (natch / natch_pop * 100000).toFixed(2);
+var orleans_dph = (orleans / orleans_pop * 100000).toFixed(2);
+var ouach_dph = (ouach / ouach_pop * 100000).toFixed(2);
+var plaque_dph = (plaque / plaque_pop * 100000).toFixed(2);
+var pc_dph = (pc / pc_pop * 100000).toFixed(2);
+var rapides_dph = (rapides / rapides_pop * 100000).toFixed(2);
+var rr_dph = (rr / rr_pop * 100000).toFixed(2);
+var rich_dph = (rich / rich_pop * 100000).toFixed(2);
+var sabine_dph = (sabine / sabine_pop * 100000).toFixed(2);
+var sb_dph = (sb / sb_pop * 100000).toFixed(2);
+var sc_dph = (sc / sc_pop * 100000).toFixed(2);
+var sh_dph = (sh / sh_pop * 100000).toFixed(2);
+var sj_dph = (sj / sj_pop * 100000).toFixed(2);
+var sjb_dph = (sjb / sjb_pop * 100000).toFixed(2);
+var sl_dph = (sl / sl_pop * 100000).toFixed(2);
+var sm_dph = (sm / sm_pop * 100000).toFixed(2);
+var stmary_dph = (stmary / stmary_pop * 100000).toFixed(2);
+var st_dph = (st / st_pop * 100000).toFixed(2);
+var tang_dph = (tang / tang_pop * 100000).toFixed(2);
+var tensas_dph = (tensas / tensas_pop * 100000).toFixed(2);
+var terr_dph = (terr / terr_pop * 100000).toFixed(2);
+var union_dph = (union / union_pop * 100000).toFixed(2);
+var vermilion_dph = (vermilion / vermilion_pop * 100000).toFixed(2);
+var vernon_dph = (vernon / vernon_pop * 100000).toFixed(2);
+var wash_dph = (wash / wash_pop * 100000).toFixed(2);
+var webster_dph = (webster / webster_pop * 100000).toFixed(2);
+var wbr_dph = (wbr / wbr_pop * 100000).toFixed(2);
+var wc_dph = (wc / wc_pop * 100000).toFixed(2);
+var wf_dph = (wf / wf_pop * 100000).toFixed(2);
+var winn_dph = (winn / winn_pop * 100000).toFixed(2);
+
+//create array for table
+let deaths = [
+	{Parish: "Acadia", Deaths: acadia_dph}, {Parish: "Allen", Deaths: allen_dph}, {Parish:  "Ascension", Deaths: asc_dph}, {Parish:  "Assumption", Deaths: assumption_dph}, {Parish:  "Avoyelles", Deaths: avoyelles_dph}, {Parish:  "Beauregard", Deaths: beau_dph}, {Parish:  "Bienville", Deaths: bien_dph}, {Parish:  "Bossier", Deaths: bossier_dph}, {Parish:  "Caddo", Deaths: caddo_dph}, {Parish:  "Calcasieu", Deaths: calc_dph}, {Parish:  "Caldwell", Deaths: caldwell_dph}, {Parish:  "Catahoula", Deaths: cat_dph}, {Parish:  "Claiborne", Deaths: claiborne_dph}, {Parish:  "Concordia", Deaths: concordia_dph}, {Parish:  "DeSoto", Deaths: desoto_dph}, {Parish:  "East Baton Rouge", Deaths: ebr_dph}, {Parish:  "East Feliciana", Deaths: ef_dph}, {Parish:  "Evangeline", Deaths: evangeline_dph}, {Parish:  "Franklin", Deaths: franklin_dph}, {Parish:  "Grant", Deaths: grant_dph}, {Parish:  "Iberia", Deaths: iberia_dph}, {Parish:  "Iberville", Deaths: iberville_dph}, {Parish:  "Jackson", Deaths: jackson_dph}, {Parish:  "Jefferson", Deaths: jefferson_dph}, {Parish:  "Jefferson Davis", Deaths: jd_dph}, {Parish:  "Lafayette", Deaths: lafayette_dph}, {Parish:  "Lafourche", Deaths: lafourche_dph}, {Parish:  "LaSalle", Deaths: lasalle_dph}, {Parish:  "Lincoln", Deaths: lincoln_dph}, {Parish:  "Livingston", Deaths: livingston_dph}, {Parish:  "Madison", Deaths: madison_dph}, {Parish:  "Morehouse", Deaths: more_dph}, {Parish:  "Natchitoches", Deaths: natch_dph}, {Parish:  "Orleans", Deaths: orleans_dph}, {Parish:  "Ouachita", Deaths: ouach_dph},{Parish:  "Pointe Coupee", Deaths: pc_dph}, {Parish:  "Rapides", Deaths: rapides_dph}, {Parish:  "Red River", Deaths: rr_dph}, {Parish:  "Richland", Deaths: rich_dph}, {Parish:  "Sabine", Deaths: sabine_dph}, {Parish:  "St. Bernard", Deaths: sb_dph}, {Parish:  "St. Charles", Deaths: sc_dph}, {Parish:  "St. James", Deaths: sj_dph}, {Parish:  "St. John the Baptist", Deaths: sjb_dph}, {Parish:  "St. Landry", Deaths: sl_dph}, {Parish:  "St. Martin", Deaths: sm_dph}, {Parish:  "St. Mary", Deaths: stmary_dph}, {Parish:  "St. Tammany", Deaths: st_dph}, {Parish:  "Tangipahoa", Deaths: tang_dph}, {Parish:  "Terrebonne", Deaths: terr_dph}, {Parish:  "Union", Deaths: union_dph}, {Parish:  "Vermilion", Deaths: vermilion_dph}, {Parish:  "Vernon", Deaths: vernon_dph}, {Parish:  "Washington", Deaths: wash_dph}, {Parish:  "Webster", Deaths: webster_dph}, {Parish:  "West Baton Rouge", Deaths: wbr_dph}, {Parish:  "West Carroll", Deaths: wc_dph}, {Parish:  "West Feliciana", Deaths: wf_dph}, {Parish:  "Winn", Deaths: winn_dph}
+];
+
+function generateTableHead(table, data) {
+	let head = table.createTableHead();
+	let row = thead.insertRow();
+	for (let key of data) {
+		let th = document.createElement("th");
+		let text = document.createTextNode(key);
+		th.appendChild(text);
+		row.appendChild(th);
+	}
+}
+
+function generateTable(table, data) {
+	for (let element of data) {
+		let row = table.insertRow();
+		for (key in element) {
+			let cell = row.insertCell();
+			let text = document.createTextNode(element[key]);
+			cell.appendChild(text);
+		}	
+	}
+}
+
+let table = document.querySelector("table");
+let data = Object.keys(deaths[0]);
+generateTable(table, deaths);
+generateTableHead(table, data);
+	</script>
 		
 </body>
 </html>
