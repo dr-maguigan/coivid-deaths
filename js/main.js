@@ -104,29 +104,19 @@ var legend = L.control({position: 'bottomright'});
 
 //add functions of legend on add to add values
 legend.onAdd = function (map) {
-	var div = L.DomUtil.create('div', 'info legend');
-	var grades = [0, 10, 100, 250, 500, 750];
-	var labels = [];
+	const div = L.DomUtil.create('div', 'info legend');
+	const grades = [0, 10, 100, 250, 500, 750];
+	const labels = [];
 	let from, to;
 
-	for (var i = 0; i < grades.length; i++) {
+	for (let i = 0; i < grades.length; i++) {
 		from = grades[i];
 		to = grades[i + 1];
-		
-		labels.push("<i style='background:${getColor(from + 1)}'></i> ${from}${to ? "&ndash;${to}" : "+"}");
+		labels.push(`<i style="background:${getColor(from + 1)}"></i> ${from}${to ? `&ndash;${to}` : '+'}`);
 		}
 		
     	return div;
 };
 
-		for (let i = 0; i < grades.length; i++) {
-			from = grades[i];
-			to = grades[i + 1];
-
-			
-
-		div.innerHTML = labels.join('<br>');
-		return div;
-	};
 //add legend to map
 legend.addTo(map);
