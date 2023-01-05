@@ -78,39 +78,45 @@ $.ajax({
 		}
 }).error(function() {});
 
+//reset highlight
 function resetHighlight(e) {
-		parishes.resetStyle(e.target);
-		info.update();
+	parishes.resetStyle(e.target);
+	info.update();
 	}
 
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
+//zoom to feature on click
+function zoomToFeature(e) {
+	map.fitBounds(e.target.getBounds());
 	}
 
-	function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
+//define oneachfeature for geojson, highlight and reset, zoom on click
+function onEachFeature(feature, layer) {
+	layer.on({
+		mouseover: highlightFeature,
+		mouseout: resetHighlight,
+		click: zoomToFeature
 		});
 	}
 
-	map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC| </a> Population data: <a href='http://census.gov/'>US Census Bureau</a>");
+//add map attribution
+map.attributionControl.addAttribution("Covid-19 deaths data: <a href='http://cdc.gov/'>CDC| </a> Population data: <a href='http://census.gov/'>US Census Bureau</a>");
 
-	var legend = L.control({position: 'bottomright'});
+//create legend in bottom right of map
+var legend = L.control({position: 'bottomright'});
 
-	legend.onAdd = function (map) {
+//add functions of legend on add to add values
+legend.onAdd = function (map) {
+	var div = L.DomUtil.create('div', 'info legend');
+	var grades = [0, 10, 100, 250, 500, 750];
+	var labels = [];
 
-		var div = L.DomUtil.create('div', 'info legend');
-		var grades = [0, 10, 100, 250, 500, 750];
-		var labels = [];
+	for (var i = 0; i < grades.length; i++) {
+		div.innerHTML +=
+			'<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            		grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    	}
+    	return div;
+};
 
-		for (var i = 0; i < grades.length; i++) {
-			div.innerHTML +=
-				'<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            			grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    		}
-    		return div;
-	};
-
-	legend.addTo(map);
+//add legend to map
+legend.addTo(map);
